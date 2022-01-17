@@ -11,15 +11,15 @@
 
 - 👯 I’m looking to on-board you on [TWODS CAPITAL](https://chat.whatsapp.com/FIL9BwZ5JZE2KklyAEPKA0)
 
-- 👨‍💻 All of my projects are available at [https://chintanr-portfolio.netlify.app/](https://chintanr-portfolio.netlify.app/)
+- 👨‍💻 All of my projects are available at [Projects || Chintan Ruparel](https://chintanr-portfolio.netlify.app/)
 
-- 📝 I regularly write articles on [https://chintanr-portfolio.netlify.app/blog.html](https://chintanr-portfolio.netlify.app/blog.html)
+- 📝 I regularly write articles on [Blog || Chintan Ruparel](https://chintanr-portfolio.netlify.app/blog.html)
 
 - 💬 Ask me about **Finance,Tech, Trading Softwares and API**
 
 - 📫 How to reach me **chintz0952@gmail.com**
 
-- 📄 Know about my experiences [https://www.twodscapital.in/twods-blog.html](https://www.twodscapital.in/twods-blog.html)
+- 📄 Know about my experiences [Blog || TWODS Capital](https://www.twodscapital.in/twods-blog.html)
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
