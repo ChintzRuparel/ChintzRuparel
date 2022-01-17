@@ -1,5 +1,5 @@
 <h1 align="left">Hi 👋, I'm Chintz Ruparel</h1>
-<h3 align="left">A tech guy with finance as his core competency</h3>
+<h2 align="left">A tech guy with finance as his core competency</h2>
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=chintzruparel" alt="chintzruparel" /></a> </p>
 
