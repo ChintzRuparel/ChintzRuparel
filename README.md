@@ -1,7 +1,6 @@
 <h1 align="left">Hi 👋, I'm Chintz Ruparel</h1>
 <h2 align="left">A tech guy with finance as his core competency</h2>
 
-[![Chintz's GitHub stats](https://github-readme-stats.vercel.app/api?username=ChintzRuparel)](https://github.com/anuraghazra/github-readme-stats)
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=chintzruparel" alt="chintzruparel" /></a> </p>
 
@@ -35,6 +34,10 @@
 
 <p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=chintzruparel&show_icons=true&locale=en&layout=compact" alt="chintzruparel" /></p>
 <br>
-<p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=chintzruparel&show_icons=true&locale=en" alt="chintzruparel" /></p>
+<!-- <p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=chintzruparel&show_icons=true&locale=en" alt="chintzruparel" /></p> -->
+
+
+[![Chintz's GitHub stats](https://github-readme-stats.vercel.app/api?username=ChintzRuparel)](https://github.com/anuraghazra/github-readme-stats)
+
 <br>
 <p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=chintzruparel&" alt="chintzruparel" /></p>
