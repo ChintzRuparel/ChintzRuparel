@@ -1,6 +1,8 @@
 <h1 align="left">Hi 👋, I'm Chintz Ruparel</h1>
 <h2 align="left">A tech guy with finance as his core competency</h2>
 
+[![Chintz's GitHub stats](https://github-readme-stats.vercel.app/api?username=ChintzRuparel)](https://github.com/anuraghazra/github-readme-stats)
+
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=chintzruparel" alt="chintzruparel" /></a> </p>
 
 <p align="left"> <a href="https://twitter.com/chintzruparel" target="blank"><img src="https://img.shields.io/twitter/follow/chintzruparel?logo=twitter&style=for-the-badge" alt="chintzruparel" /></a> </p>
