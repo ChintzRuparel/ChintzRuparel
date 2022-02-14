@@ -36,7 +36,6 @@
 <br>
 <!-- <p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=chintzruparel&show_icons=true&locale=en" alt="chintzruparel" /></p> -->
 
-[![Chintz's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=ChintzRuparel)](https://github.com/anuraghazra/github-readme-stats)
 
 
 
