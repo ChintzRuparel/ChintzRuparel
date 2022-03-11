@@ -4,7 +4,7 @@
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=chintzruparel" alt="chintzruparel" /></a> </p>
 
-<p align="left"> <a href="https://twitter.com/chintzruparel" target="blank"><img src="https://img.shields.io/twitter/follow/chintzruparel?logo=twitter&style=for-the-badge" alt="chintzruparel" /></a> </p>
+<a href="https://twitter.com/chintzruparel?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @chintzruparel</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 - 🔭 I’m currently working on [TWODS Capital](https://www.twodscapital.in/)
 
