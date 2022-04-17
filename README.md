@@ -3,8 +3,6 @@
 
 
 
-Potfolio Website Live - [![Netlify Status](https://api.netlify.com/api/v1/badges/ab5d5d66-1c14-476c-8cef-4ed02d232d3a/deploy-status)](https://app.netlify.com/sites/chintanr-portfolio/deploys)
-
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=chintzruparel" alt="chintzruparel" /></a> </p>
 
