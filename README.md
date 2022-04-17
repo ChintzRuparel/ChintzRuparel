@@ -1,8 +1,9 @@
 <h1 align="left">Hi 👋, I'm Chintz Ruparel</h1>
 <h2 align="left">A tech guy with finance as his core competency 🚀  </h2>
 
-<p align="left"> <a href="https://twitter.com/chintzruparel" target="blank"><img src="https://img.shields.io/twitter/follow/chintzruparel?logo=twitter&style=for-the-badge" alt="chintzruparel" /></a> </p>
 
+
+Potfolio Website Live - [![Netlify Status](https://api.netlify.com/api/v1/badges/ab5d5d66-1c14-476c-8cef-4ed02d232d3a/deploy-status)](https://app.netlify.com/sites/chintanr-portfolio/deploys)
 
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=chintzruparel" alt="chintzruparel" /></a> </p>
@@ -17,7 +18,7 @@
 
 - 👨‍💻 All of my projects are available at [Projects || Chintan Ruparel](https://chintanr-portfolio.netlify.app/)
 
-- 📝 I regularly write articles on [Blog || Chintan Ruparel](https://my-blog-chintz.digitalpress.blog/)
+- 📝 I regularly write articles on [the blog by Chintz Ruparel](https://my-blog-chintz.digitalpress.blog/)
 
 - 💬 Ask me about **Finance,Tech, Trading Softwares and API**
 
@@ -46,3 +47,5 @@
 
 <br>
 <p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=chintzruparel&" alt="chintzruparel" /></p>
+
+
