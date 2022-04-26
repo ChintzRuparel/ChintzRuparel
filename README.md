@@ -4,7 +4,7 @@
 
 
 
-<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=chintzruparel" alt="chintzruparel" /></a> </p>
+<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=chintzruparel&theme=monokai" alt="chintzruparel" /></a> </p>
 
 
 
@@ -41,9 +41,10 @@
 
 
 
-[![Chintz's GitHub stats](https://github-readme-stats.vercel.app/api?username=ChintzRuparel)](https://github.com/anuraghazra/github-readme-stats)
+[![Chintz's GitHub stats](https://github-readme-stats.vercel.app/api?username=ChintzRuparel&show_icons=true&theme=radical)](https://github.com/anuraghazra/github-readme-stats)
 
 <br>
-<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=chintzruparel&" alt="chintzruparel" /></p>
+
+[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=ChintzRuparel&theme=radical&hide_border=true&date_format=M%20j%5B%2C%20Y%5D)](https://git.io/streak-stats)
 
 [![Chintz's github activity graph](https://activity-graph.herokuapp.com/graph?username=ChintzRuparel&theme=react-dark)](https://github.com/ChintzRuparel/github-readme-activity-graph)
