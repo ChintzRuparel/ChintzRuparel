@@ -4,7 +4,7 @@
 
 
 
-<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=chintzruparel&theme=monokai" alt="chintzruparel" /></a> </p>
+<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=chintzruparel&theme=dracula&no-frame=true"  alt="chintzruparel" /></a> </p>
 
 
 
@@ -41,7 +41,7 @@
 
 
 
-[![Chintz's GitHub stats](https://github-readme-stats.vercel.app/api?username=ChintzRuparel&show_icons=true&theme=radical)](https://github.com/anuraghazra/github-readme-stats)
+[![Chintz's GitHub stats](https://github-readme-stats.vercel.app/api?username=ChintzRuparel&show_icons=true&theme=radical&hide_border=true)](https://github.com/anuraghazra/github-readme-stats)
 
 <br>
 
