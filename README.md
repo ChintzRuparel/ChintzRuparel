@@ -46,4 +46,4 @@
 <br>
 <p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=chintzruparel&" alt="chintzruparel" /></p>
 
-
+[![Chintz's github activity graph](https://activity-graph.herokuapp.com/graph?username=ChintzRuparel&theme=react-dark)](https://github.com/ChintzRuparel/github-readme-activity-graph)
