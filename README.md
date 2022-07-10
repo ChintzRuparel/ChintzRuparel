@@ -1,7 +1,6 @@
 <h1 align="left">Hi 👋, I'm Chintz Ruparel</h1>
 <h2 align="left">A tech guy with finance as his core competency 🚀  </h2>
 
-Potfolio Website Live - [![Netlify Status](https://api.netlify.com/api/v1/badges/ab5d5d66-1c14-476c-8cef-4ed02d232d3a/deploy-status)](https://app.netlify.com/sites/chintanr-portfolio/deploys)
 
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=chintzruparel&theme=dracula&no-frame=true"  alt="chintzruparel" /></a> </p>
@@ -52,13 +51,3 @@ Potfolio Website Live - [![Netlify Status](https://api.netlify.com/api/v1/badges
 [![Chintz's github activity graph](https://activity-graph.herokuapp.com/graph?username=ChintzRuparel&theme=react-dark)](https://github.com/ChintzRuparel/github-readme-activity-graph)
 
 
-
-Important Links for the blog 
-<ul>
-  <li><a href="https://my-blog-chintz.digitalpress.blog/ghost">Blog Backend (Ghost)</a></li>
-<br>
-  <li><a href="https://my-blog-chintz.digitalpress.blog/author/chintan/">Author ID </a></li>
-</ul>  
-                                                         
-     
-     
