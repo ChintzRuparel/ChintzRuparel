@@ -48,6 +48,5 @@
 
 [![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=ChintzRuparel&theme=radical&hide_border=true&date_format=M%20j%5B%2C%20Y%5D)](https://git.io/streak-stats)
 
-[![Chintz's github activity graph](https://activity-graph.herokuapp.com/graph?username=ChintzRuparel&theme=react-dark)](https://github.com/ChintzRuparel/github-readme-activity-graph)
-
+[![ChintzRuparel's github activity graph](https://activity-graph.herokuapp.com/graph?username=ChintzRuparel&bg_color=000000&color=ffffff&line=ffffff&point=ff0000&area=true&hide_border=true)](https://github.com/ashutosh00710/github-readme-activity-graph)
 
