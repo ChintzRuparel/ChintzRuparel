@@ -42,8 +42,6 @@
 
 [![Chintz's GitHub stats](https://github-readme-stats.vercel.app/api?username=ChintzRuparel&show_icons=true&theme=radical&hide_border=true)](https://github.com/anuraghazra/github-readme-stats)
 
-<br>
-
 [![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=ChintzRuparel&theme=radical&hide_border=true&date_format=M%20j%5B%2C%20Y%5D)](https://git.io/streak-stats)
 
 [![Chintz's github activity graph](https://github-readme-activity-graph.cyclic.app/graph?username=ChintzRuparel&bg_color=000000&color=ffffff&line=ff0000&point=ffffff&area=true&hide_border=true)](https://github.com/ashutosh00710/github-readme-activity-graph)
