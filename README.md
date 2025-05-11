@@ -1,15 +1,15 @@
 <h1 align="left">Hey, I'm Chintan N. Ruparel</h1>
 <h3 align="left">Tech-First. Finance-Fueled. Scaling at the edge of code & capital 🖥️💸</h3>
 
-<hr>
+<hr/>
 
 ### 🚀 About Me  
-- 🧠 MS in Computer Engineering @ NYU Tandon | FinTech coursework @ NYU Stern  
+- 🧠 MS in Computer Engineering @ NYU Tandon | FinTech @ NYU Stern  
 - 🧬 Building the future of trading infra & algorithmic intelligence at [TWODS Capital](https://www.twodscapital.in)  
 - 🧪 Quant-Driven | Python-Native | Trading API Architect | Real-Time System Optimizer  
 - 🌐 Tech stack bleeding into finance, cloud, AI, and web infra  
 
-<hr>
+<hr/>
 
 ### 🛠️ Current Stack  
 **Languages**: `Python`, `C++`, `JavaScript`, `SQL`, `Java`  
@@ -21,9 +21,7 @@
 - 🌍 **Web Systems** → Scalable React Architectures, AMP Optimization  
 - ☁️ **Infra** → AWS, DevOps, GitOps  
 
-<hr>
-
-<hr>
+<hr/>
 
 ### 💼 Experience
 
@@ -48,9 +46,7 @@
 - Parsed 500K+ data points for trading signal development  
 - Built market risk analysis scripts using Python, R, and C++  
 
-<hr>
-
-<hr>
+<hr/>
 
 ### 🎓 Education
 
@@ -65,9 +61,7 @@
 *B.Tech in Computer Engineering (2018–2024) | GPA: 3.33/4*  
 `Capstone:` Pneumonia detection via CNN-based biomedical imaging  
 
-<hr>
-
-<hr>
+<hr/>
 
 ### 🏅 Awards & Certifications
 
@@ -76,9 +70,7 @@
 - 💼 **Micro-Internships** at HSBC & JPMorgan (M&A Strategy, Modeling)  
 - 📜 **NISM Certified**: Equity + Currency Derivatives  
 
-<hr>
-
-<hr>
+<hr/>
 
 ### 🌐 Connect with Me
 
@@ -90,16 +82,13 @@
 - ✍️ [Medium](https://medium.com/@chintz0952)  
 - 📫 Email: [cr3745@nyu.edu](mailto:cr3745@nyu.edu)
 
-<hr>
-
-<hr>
+<hr/>
 
 ### 📊 GitHub Stats
 
 ![GitHub Streak](https://streak-stats.demolab.com/?user=ChintzRuparel&theme=algolia&hide_border=true)  
 ![Chintan's GitHub stats](https://github-readme-stats.vercel.app/api?username=ChintzRuparel&show_icons=true&theme=algolia&hide_border=true)
 
-<hr>
+<hr/>
 
 > _“Tech isn’t a tool — it’s the engine. Finance isn’t a market — it’s a system. I architect both.”_
-
