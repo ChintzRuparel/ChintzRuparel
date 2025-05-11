@@ -1,47 +1,105 @@
-<h1 align="left">Hi 👋, I'm Chintz Ruparel</h1>
-<h2 align="left">A tech guy with finance as his core competency 🚀  </h2>
+<h1 align="left">Hey, I'm Chintan N. Ruparel</h1>
+<h3 align="left">Tech-First. Finance-Fueled. Scaling at the edge of code & capital 🖥️💸</h3>
 
+<hr>
 
+### 🚀 About Me  
+- 🧠 MS in Computer Engineering @ NYU Tandon | FinTech coursework @ NYU Stern  
+- 🧬 Building the future of trading infra & algorithmic intelligence at [TWODS Capital](https://www.twodscapital.in)  
+- 🧪 Quant-Driven | Python-Native | Trading API Architect | Real-Time System Optimizer  
+- 🌐 Tech stack bleeding into finance, cloud, AI, and web infra  
 
-<p align="left"> <a href="[https://github.com/ryo-ma/github-profile-trophy](https://github.com/ChintzRuparel)"><img width=1900 src="https://github-profile-trophy.vercel.app/?username=chintzruparel&&column=7&theme=gruvbox&no-frame=true"  alt="chintzruparel" /></a> </p>
+<hr>
 
+### 🛠️ Current Stack  
+**Languages**: `Python`, `C++`, `JavaScript`, `SQL`, `Java`  
+**Frameworks/Tools**: `React`, `Node.js`, `LSTM`, `RL`, `PostgreSQL`, `AMP`, `Docker`, `AWS`, `Git`, `CI/CD`  
 
-- 🔭 I’m currently working on [TWODS Capital](https://www.twodscapital.in/)
+**Tech Domains**:  
+- 🤖 **AI/ML** → Deep Learning, Reinforcement Learning, LSTMs  
+- 💹 **FinTech** → Algo Trading, HFT, Risk Engines, Quant Backtesting  
+- 🌍 **Web Systems** → Scalable React Architectures, AMP Optimization  
+- ☁️ **Infra** → AWS, DevOps, GitOps  
 
-- 🌱 I’m currently learning **AMP, REACT, PYTHON,FRONT-END**
+<hr>
 
-- 👯 I’m looking to on-board you on [TWODS CAPITAL](https://chat.whatsapp.com/FIL9BwZ5JZE2KklyAEPKA0)
+<hr>
 
-- 👨‍💻 All of my projects are available at [Projects || Chintan Ruparel](https://chintanr-portfolio.netlify.app/)
+### 💼 Experience
 
-- 📝 I regularly write articles on [the blog by Chintz Ruparel](https://my-blog-chintz.digitalpress.blog/)
+**📈 Founder & CEO @ TWODS Capital**  
+*Oct 2022 – Present*  
+- Engineered an algo-trading engine delivering 16% CAGR for 300+ clients  
+- Shipped production-grade Python backtesting pipelines  
+- Deployed analytics and strategy models with CI/CD on AWS  
 
-- 💬 Ask me about **Finance,Tech, Trading Softwares and API**
+**🧠 Financial Strategist @ Algobulls**  
+*Aug 2021 – Present*  
+- Designed 15+ trading strategies using LSTMs & Reinforcement Learning  
+- Built scalable alpha-testing & backtesting frameworks in Python  
 
-- 📫 How to reach me **chintz0952@gmail.com**
+**🖥️ Full Stack Developer Intern @ EmReach**  
+*Dec 2021 – Apr 2022*  
+- Improved web performance with AMP (↓ 60% bounce rate)  
+- Designed UI for a trading app with $10M projected impact  
 
-- 📄 Know about my experiences [Blog || TWODS Capital](https://www.twodscapital.in/twods-blog.html)
+**📊 Data Science Intern @ KIFS Trade Capital**  
+*May 2021 – Jun 2021*  
+- Parsed 500K+ data points for trading signal development  
+- Built market risk analysis scripts using Python, R, and C++  
 
-- 🏅 Check out [TWODS Capital](https://github.com/TWODS-CAPITAL)  on GitHub 
+<hr>
 
-<h3 align="left">Connect with me:</h3>
-<p align="left">
-<a href="https://twitter.com/chintzruparel" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="chintzruparel" height="30" width="40" /></a>
-<a href="https://fb.com/chintsruparel" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="chintan ruparel" height="30" width="40" /></a>
-<a href="https://instagram.com/cm_ruparell" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="cm_ruparell" height="30" width="40" /></a>
-</p>
+<hr>
 
-<h3 align="left">Languages and Tools:</h3>
-<p align="left"> <a href="https://developer.android.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original-wordmark.svg" alt="android" width="40" height="40"/> </a> <a href="https://getbootstrap.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> </a> <a href="https://www.cprogramming.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="c" width="40" height="40"/> </a> <a href="https://www.w3schools.com/cpp/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" alt="cplusplus" width="40" height="40"/> </a> <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> <a href="https://www.figma.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a> <a href="https://flutter.dev" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" alt="flutter" width="40" height="40"/> </a> <a href="https://www.framer.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/framer/framer-icon.svg" alt="framer" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://www.adobe.com/in/products/illustrator.html" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/adobe_illustrator/adobe_illustrator-icon.svg" alt="illustrator" width="40" height="40"/> </a> <a href="https://www.invisionapp.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/invisionapp/invisionapp-icon.svg" alt="invision" width="40" height="40"/> </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://www.photoshop.com/en" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/photoshop/photoshop-line.svg" alt="photoshop" width="40" height="40"/> </a> <a href="https://postman.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a> <a href="https://sass-lang.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sass/sass-original.svg" alt="sass" width="40" height="40"/> </a> <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt="tailwind" width="40" height="40"/> </a> <a href="https://www.wxwidgets.org/" target="_blank" rel="noreferrer"> <img src="https://upload.wikimedia.org/wikipedia/commons/b/bb/WxWidgets.svg" alt="wx_widgets" width="40" height="40"/> </a> <a href="https://www.adobe.com/products/xd.html" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/adobe-xd.svg" alt="xd" width="40" height="40"/> </a> </p>
+### 🎓 Education
 
+**🎓 NYU Tandon School of Engineering**  
+*MS, Computer Engineering (2024–2026)*  
+`Courses:` AI, ML, Internet Architecture  
 
-<!-- <p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=chintzruparel&show_icons=true&locale=en" alt="chintzruparel" /></p> -->
+**📈 NYU Stern School of Business**  
+*FinTech, M&A Strategies*
 
+**🧪 NMIMS MPSTME**  
+*B.Tech in Computer Engineering (2018–2024) | GPA: 3.33/4*  
+`Capstone:` Pneumonia detection via CNN-based biomedical imaging  
 
+<hr>
 
+<hr>
 
-[![Chintz's GitHub stats](https://github-readme-stats.vercel.app/api?username=ChintzRuparel&show_icons=true&theme=radical&hide_border=true)](https://github.com/anuraghazra/github-readme-stats)
+### 🏅 Awards & Certifications
 
-[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=ChintzRuparel&theme=radical&hide_border=true&date_format=M%20j%5B%2C%20Y%5D)](https://git.io/streak-stats)
+- 🥇 **Student Ambassador Award**, NMIMS  
+- 🥈 **Runner-up**, MPSTME Web Dev Challenge  
+- 💼 **Micro-Internships** at HSBC & JPMorgan (M&A Strategy, Modeling)  
+- 📜 **NISM Certified**: Equity + Currency Derivatives  
 
+<hr>
+
+<hr>
+
+### 🌐 Connect with Me
+
+- 🧠 Portfolio: [chintanr.tech](https://chintanr.tech)  
+- 📝 Blog: [my-blog-chintz](https://my-blog-chintz.digitalpress.blog)  
+- 🏢 Company: [twodscapital.in](https://www.twodscapital.in)  
+- 💼 [LinkedIn](https://www.linkedin.com/in/chintan-ruparel-5a5204223/)  
+- 💻 [GitHub](https://github.com/ChintzRuparel)  
+- ✍️ [Medium](https://medium.com/@chintz0952)  
+- 📫 Email: [cr3745@nyu.edu](mailto:cr3745@nyu.edu)
+
+<hr>
+
+<hr>
+
+### 📊 GitHub Stats
+
+![GitHub Streak](https://streak-stats.demolab.com/?user=ChintzRuparel&theme=algolia&hide_border=true)  
+![Chintan's GitHub stats](https://github-readme-stats.vercel.app/api?username=ChintzRuparel&show_icons=true&theme=algolia&hide_border=true)
+
+<hr>
+
+> _“Tech isn’t a tool — it’s the engine. Finance isn’t a market — it’s a system. I architect both.”_
 
