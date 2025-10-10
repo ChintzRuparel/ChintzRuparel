@@ -1,4 +1,6 @@
 <h1 align="left">Hey, I'm Chintan N. Ruparel</h1>
+
+> _“Tech isn’t a tool — it’s the engine. Finance isn’t a market — it’s a system. I architect both.”_  
 <h3 align="left">Tech-First. Finance-Fueled. Scaling at the edge of code & capital 🖥️💸</h3>
 
 <hr/>
@@ -101,4 +103,3 @@
 
 <hr/>
 
-> _“Tech isn’t a tool — it’s the engine. Finance isn’t a market — it’s a system. I architect both.”_  
