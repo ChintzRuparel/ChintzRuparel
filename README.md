@@ -100,5 +100,5 @@
 
 <img src="https://streak-stats.demolab.com/?user=ChintzRuparel&theme=tokyonight&hide_border=true" height="170"/>
 
-<hr/>
+
 
