@@ -98,8 +98,7 @@
 
 ### 📊 GitHub Stats
 
-![GitHub Streak](https://streak-stats.demolab.com/?user=ChintzRuparel&theme=algolia&hide_border=true)  
-![Chintan's GitHub stats](https://github-readme-stats.vercel.app/api?username=ChintzRuparel&show_icons=true&theme=algolia&hide_border=true)  
+<img src="https://streak-stats.demolab.com/?user=ChintzRuparel&theme=tokyonight&hide_border=true" height="170"/>
 
 <hr/>
 
