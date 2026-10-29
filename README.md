@@ -98,7 +98,12 @@
 
 ### 📊 GitHub Stats
 
-<img src="https://streak-stats.demolab.com/?user=ChintzRuparel&theme=tokyonight&hide_border=true" height="170"/>
+<!-- <img src="https://streak-stats.demolab.com/?user=ChintzRuparel&theme=tokyonight&hide_border=true" height="170"/> -->
 
-
+<a href="https://chintzruparel.github.io/ChintzRuparel/">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/commit-chart-dark.svg">
+    <img alt="Commits per quarter, year over year" src="assets/commit-chart-light.svg" width="100%">
+  </picture>
+</a>
 
