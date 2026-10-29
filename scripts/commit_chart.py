@@ -151,6 +151,53 @@ def sample_data(login: str, n_years: int, now: dt.datetime) -> ChartData:
     return ChartData(login, years, counts, (now.year, cq), ytd_prev, now)
 
 
+def fetch_daily(login: str, token: str, now: dt.datetime) -> dict:
+    """Every day since the account was created, from the contribution calendar.
+
+    This is the same series as the green squares on the profile, so private work
+    is included whenever 'Private contributions' is switched on in profile settings.
+    """
+    user = gql("query($login: String!) { user(login: $login) { login createdAt } }",
+               {"login": login}, token)["user"]
+    created = dt.date.fromisoformat(user["createdAt"][:10])
+    today = now.date()
+    days: dict[dt.date, int] = {}
+    for year in range(created.year, today.year + 1):
+        start = dt.datetime(year, 1, 1, tzinfo=UTC)
+        end = min(dt.datetime(year, 12, 31, 23, 59, 59, tzinfo=UTC), now)
+        query = ('query($login: String!) { user(login: $login) { '
+                 f'contributionsCollection(from: "{iso(start)}", to: "{iso(end)}") '
+                 '{ contributionCalendar { weeks { contributionDays { date contributionCount } } } } } }')
+        cal = gql(query, {"login": login}, token)["user"]["contributionsCollection"]["contributionCalendar"]
+        for week in cal["weeks"]:
+            for day in week["contributionDays"]:
+                d = dt.date.fromisoformat(day["date"])
+                if d.year == year and created <= d <= today:
+                    days[d] = day["contributionCount"]
+    span = (today - created).days + 1
+    return {
+        "login": user["login"],
+        "generated": iso(now),
+        "start": created.isoformat(),
+        "counts": [days.get(created + dt.timedelta(i), 0) for i in range(span)],
+    }
+
+
+def sample_daily(login: str, now: dt.datetime) -> dict:
+    rng = random.Random(login + "daily")
+    start = dt.date(now.year - 7, 6, 6)
+    span = (now.date() - start).days + 1
+    counts = []
+    for i in range(span):
+        d = start + dt.timedelta(i)
+        trend = 1.5 + 6 * (i / span) ** 2
+        busy = 1.8 if d.month in (9, 10, 3) else 1.0
+        weekend = 0.35 if d.weekday() >= 5 else 1.0
+        lam = trend * busy * weekend
+        counts.append(0 if rng.random() < 0.18 else max(0, int(rng.expovariate(1 / lam))))
+    return {"login": login, "generated": iso(now), "start": start.isoformat(), "counts": counts}
+
+
 # --------------------------------------------------------------------------- drawing
 
 W, H = 800, 410
@@ -315,6 +362,7 @@ def main() -> None:
     p.add_argument("--user", default=os.environ.get("GITHUB_REPOSITORY_OWNER"), help="GitHub login")
     p.add_argument("--years", type=int, default=5, help="How many years to show (1 to 8)")
     p.add_argument("--out-dir", default="assets", help="Where to write the SVGs")
+    p.add_argument("--json-out", help="Also write daily counts for the interactive page, e.g. docs/commits.json")
     p.add_argument("--sample", action="store_true", help="Use fake data instead of the API")
     args = p.parse_args()
 
@@ -323,6 +371,7 @@ def main() -> None:
     n_years = max(1, min(8, args.years))
     now = dt.datetime.now(UTC)
 
+    token = ""
     if args.sample:
         data = sample_data(args.user, n_years, now)
     else:
@@ -339,6 +388,13 @@ def main() -> None:
         print(f"wrote {path}")
     for year in data.years:
         print(year, data.counts[year])
+
+    if args.json_out:
+        daily = sample_daily(args.user, now) if args.sample else fetch_daily(args.user, token, now)
+        path = Path(args.json_out)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(daily, separators=(",", ":")), encoding="utf-8")
+        print(f"wrote {path} ({len(daily['counts'])} days, {sum(daily['counts']):,} contributions)")
 
 
 if __name__ == "__main__":

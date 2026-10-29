@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commit history</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+<script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #ffffff; --panel: #f6f8fa; --border: #d0d7de; --text: #1f2328; --muted: #656d76;
+    --grid: #eaeef2; --bar: #2da44e; --bar-soft: #aceebb; --ma: #0969da; --cum: #8250df;
+    --up: #1a7f37; --down: #cf222e; --pressed: #1f2328; --pressed-text: #ffffff;
+    --window: rgba(45, 164, 78, .14); --shade: rgba(246, 248, 250, .72);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --bg: #0d1117; --panel: #161b22; --border: #30363d; --text: #e6edf3; --muted: #7d8590;
+      --grid: #21262d; --bar: #3fb950; --bar-soft: #1f4d2c; --ma: #58a6ff; --cum: #bc8cff;
+      --up: #3fb950; --down: #f85149; --pressed: #e6edf3; --pressed-text: #0d1117;
+      --window: rgba(63, 185, 80, .16); --shade: rgba(13, 17, 23, .7);
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); }
+  body {
+    font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+    font-variant-numeric: tabular-nums;
+  }
+  main { max-width: 1120px; margin: 0 auto; padding: 32px 24px 40px; }
+  a { color: inherit; }
+
+  header { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: flex-end; }
+  h1 { font-size: 26px; line-height: 1.2; margin: 0 0 4px; font-weight: 600; letter-spacing: -.01em; }
+  .sub { color: var(--muted); margin: 0; }
+  .range-label { color: var(--muted); margin: 0; text-align: right; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 24px 0 20px;
+           border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .stat { padding: 14px 16px 14px 0; }
+  .stat + .stat { padding-left: 16px; border-left: 1px solid var(--border); }
+  .stat b { display: block; font-size: 24px; line-height: 1.2; font-weight: 600; }
+  .stat span { color: var(--muted); font-size: 12px; }
+  .up { color: var(--up); } .down { color: var(--down); }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: center; margin-bottom: 10px; }
+  .group { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .group button { border: 0; border-radius: 0; }
+  .group button + button { border-left: 1px solid var(--border); }
+  button {
+    font: inherit; font-size: 13px; color: var(--text); background: var(--bg);
+    border: 1px solid var(--border); border-radius: 999px; padding: 4px 12px; cursor: pointer;
+  }
+  .group button { padding: 5px 12px; }
+  button:hover { background: var(--panel); }
+  button[aria-pressed="true"] { background: var(--pressed); color: var(--pressed-text); border-color: var(--pressed); }
+  button:focus-visible { outline: 2px solid var(--ma); outline-offset: 2px; position: relative; z-index: 1; }
+  .toggle::before { content: ""; display: inline-block; width: 10px; height: 3px; border-radius: 2px;
+                    margin-right: 6px; vertical-align: middle; background: var(--c); }
+  .spacer { flex: 1; }
+  .years { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+
+  .panel { position: relative; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  #chart { height: 440px; }
+  .legend { position: absolute; top: 10px; left: 14px; z-index: 3; pointer-events: none;
+            font-size: 12px; line-height: 1.6; background: color-mix(in srgb, var(--bg) 85%, transparent);
+            padding: 4px 8px; border-radius: 6px; }
+  .legend .when { font-weight: 600; font-size: 13px; }
+  .legend i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; }
+  .message { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted);
+             padding: 24px; text-align: center; z-index: 4; background: var(--bg); }
+  .message[hidden] { display: none; }
+
+  #nav { display: block; width: 100%; height: 64px; border-top: 1px solid var(--border);
+         cursor: crosshair; touch-action: none; user-select: none; }
+  #nav .win { cursor: grab; }
+  #nav.dragging .win { cursor: grabbing; }
+  #nav .handle { cursor: ew-resize; }
+
+  footer { color: var(--muted); font-size: 12px; margin-top: 14px; display: flex; flex-wrap: wrap;
+           gap: 6px 24px; justify-content: space-between; }
+  kbd { font: inherit; font-size: 11px; border: 1px solid var(--border); border-bottom-width: 2px;
+        border-radius: 4px; padding: 0 4px; }
+
+  @media (max-width: 720px) {
+    main { padding: 20px 14px 32px; }
+    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .stat:nth-child(3) { padding-left: 0; border-left: 0; }
+    .stat:nth-child(n+3) { border-top: 1px solid var(--border); }
+    #chart { height: 340px; }
+    header { gap: 8px; }
+    .range-label { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1>Commit history</h1>
+      <p class="sub" id="who">Loading your contribution data</p>
+    </div>
+    <p class="range-label" id="range-label"></p>
+  </header>
+
+  <section class="stats" aria-live="polite">
+    <div class="stat"><b id="s-total">0</b><span>commits in view</span></div>
+    <div class="stat"><b id="s-avg">0</b><span>a day on average</span></div>
+    <div class="stat"><b id="s-best">0</b><span id="s-best-when">best day</span></div>
+    <div class="stat"><b id="s-change">0</b><span id="s-change-when">against the period before</span></div>
+  </section>
+
+  <div class="controls">
+    <div class="group" role="group" aria-label="Time range" id="ranges">
+      <button data-range="1m">1M</button><button data-range="3m">3M</button><button data-range="6m">6M</button>
+      <button data-range="ytd">YTD</button><button data-range="1y">1Y</button><button data-range="all">All</button>
+    </div>
+    <div class="group" role="group" aria-label="Bar size" id="intervals">
+      <button data-interval="day">Day</button><button data-interval="week">Week</button>
+      <button data-interval="month">Month</button><button data-interval="quarter">Quarter</button>
+    </div>
+    <span class="spacer"></span>
+    <button class="toggle" id="t-ma" style="--c: var(--ma)" aria-pressed="true">Average</button>
+    <button class="toggle" id="t-cum" style="--c: var(--cum)" aria-pressed="false">Running total</button>
+  </div>
+  <div class="years" id="years" role="group" aria-label="Jump to year"></div>
+
+  <div class="panel">
+    <div class="legend" id="legend"></div>
+    <div id="chart"></div>
+    <svg id="nav" aria-label="Overview of all years; drag the highlighted window to move through time"></svg>
+    <div class="message" id="message">Loading…</div>
+  </div>
+
+  <footer>
+    <span>Drag to pan, scroll or pinch to zoom. Keys: <kbd>←</kbd> <kbd>→</kbd> pan, <kbd>+</kbd> <kbd>−</kbd> zoom, <kbd>0</kbd> show everything.</span>
+    <span id="updated"></span>
+  </footer>
+</main>
+
+<!-- Optional: paste the contents of commits.json in here to make the page work offline. -->
+<script type="application/json" id="commit-data"></script>
+
+<script>
+(() => {
+  const DAY = 86400000;
+  const MA = { day: [30, "30-day average"], week: [12, "12-week average"], month: [6, "6-month average"], quarter: [4, "4-quarter average"] };
+  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  const $ = (s) => document.querySelector(s);
+  const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const fmt = (v) => Math.round(v).toLocaleString("en-US");
+  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  const toMs = (s) => Date.UTC(+s.slice(0, 4), +s.slice(5, 7) - 1, +s.slice(8, 10));
+  const isoDay = (ms) => new Date(ms).toISOString().slice(0, 10);
+  const dayText = (ms) => { const d = new Date(ms); return `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`; };
+
+  let counts, prefix, startMs, n, login;
+  let interval = "day", userInterval = "day", bars = [];
+  const ORDER = ["day", "week", "month", "quarter"];
+  let chart, histo, maLine, cumLine;
+  let programmaticUntil = 0, activeKey = null, target = null;  // target: exact day span of the active button
+
+  // ------------------------------------------------------------------ data
+  async function loadData() {
+    const inline = $("#commit-data").textContent.trim();
+    if (inline) return JSON.parse(inline);
+    const res = await fetch("commits.json", { cache: "no-cache" });
+    if (!res.ok) throw new Error("commits.json isn't there yet. Run the Commit chart workflow once to create it.");
+    return res.json();
+  }
+
+  const sum = (a, b) => (b < a ? 0 : prefix[b + 1] - prefix[a]);
+  const dayIndex = (ms) => Math.round((ms - startMs) / DAY);
+
+  function periodStart(ms, iv) {
+    const d = new Date(ms), y = d.getUTCFullYear(), m = d.getUTCMonth();
+    if (iv === "day") return ms;
+    if (iv === "week") return ms - ((d.getUTCDay() + 6) % 7) * DAY;  // weeks start Monday
+    if (iv === "month") return Date.UTC(y, m, 1);
+    return Date.UTC(y, m - (m % 3), 1);
+  }
+  function periodEnd(p, iv) {
+    const d = new Date(p), y = d.getUTCFullYear(), m = d.getUTCMonth();
+    if (iv === "day") return p;
+    if (iv === "week") return p + 6 * DAY;
+    return Date.UTC(y, m + (iv === "month" ? 1 : 3), 1) - DAY;
+  }
+
+  function buildBars(iv) {
+    const out = [];
+    for (let i = 0; i < n; i++) {
+      const p = periodStart(startMs + i * DAY, iv);
+      let b = out[out.length - 1];
+      if (!b || b.t !== p) { b = { t: p, first: i, last: i, v: 0 }; out.push(b); }
+      b.last = i; b.v += counts[i];
+    }
+    const [win] = MA[iv];
+    let run = 0, cum = 0;
+    out.forEach((b, i) => {
+      run += b.v; if (i >= win) run -= out[i - win].v;
+      b.ma = run / Math.min(i + 1, win);
+      b.cum = (cum += b.v);
+    });
+    const last = out[out.length - 1];
+    last.partial = periodEnd(last.t, iv) > startMs + (n - 1) * DAY || iv === "day";
+    return out;
+  }
+
+  function barLabel(b) {
+    const d = new Date(b.t), y = d.getUTCFullYear(), m = d.getUTCMonth();
+    if (interval === "day") return `${WEEKDAYS[d.getUTCDay()]} ${dayText(b.t)}`;
+    if (interval === "week") return `Week of ${dayText(b.t)}`;
+    if (interval === "month") return `${MONTHS[m]} ${y}`;
+    return `Q${m / 3 + 1} ${y}`;
+  }
+
+  // ------------------------------------------------------------------ chart
+  function chartTheme() {
+    return {
+      layout: { background: { type: "solid", color: css("--bg") }, textColor: css("--muted") },
+      grid: { vertLines: { visible: false }, horzLines: { color: css("--grid") } },
+      crosshair: {
+        vertLine: { color: css("--muted"), labelBackgroundColor: css("--pressed") },
+        horzLine: { color: css("--muted"), labelBackgroundColor: css("--pressed") },
+      },
+    };
+  }
+
+  function createChart() {
+    chart = LightweightCharts.createChart($("#chart"), {
+      autoSize: true,
+      ...chartTheme(),
+      layout: { ...chartTheme().layout, fontSize: 11,
+                fontFamily: getComputedStyle(document.body).fontFamily },
+      rightPriceScale: { borderVisible: false, scaleMargins: { top: 0.18, bottom: 0 } },
+      leftPriceScale: { visible: false, borderVisible: false, scaleMargins: { top: 0.18, bottom: 0 } },
+      timeScale: { borderVisible: false, fixLeftEdge: true, fixRightEdge: true, minBarSpacing: 1 },
+      crosshair: { ...chartTheme().crosshair, mode: LightweightCharts.CrosshairMode.Normal },
+      handleScale: { axisPressedMouseMove: { time: true, price: false } },
+      localization: { locale: "en-US", priceFormatter: (v) => fmt(v) },
+    });
+    const quiet = { priceLineVisible: false, lastValueVisible: false };
+    histo = chart.addHistogramSeries({ ...quiet, priceFormat: { type: "price", precision: 0, minMove: 1 } });
+    maLine = chart.addLineSeries({ ...quiet, lineWidth: 2, crosshairMarkerVisible: false,
+                                   priceFormat: { type: "price", precision: 0, minMove: 1 } });
+    cumLine = chart.addLineSeries({ ...quiet, lineWidth: 2, priceScaleId: "left", visible: false,
+                                    priceFormat: { type: "volume" } });
+
+    chart.timeScale().subscribeVisibleLogicalRangeChange(() => {
+      if (performance.now() > programmaticUntil) setActive(null);
+      scheduleUpdate();
+    });
+    chart.subscribeCrosshairMove((p) => {
+      showLegend(p && p.time && p.logical != null ? Math.round(p.logical) : null);
+    });
+  }
+
+  function paint() {
+    const bar = css("--bar"), soft = css("--bar-soft");
+    histo.setData(bars.map((b) => ({ time: isoDay(b.t), value: b.v, color: b.partial ? soft : bar })));
+    maLine.setData(bars.map((b) => ({ time: isoDay(b.t), value: b.ma })));
+    cumLine.setData(bars.map((b) => ({ time: isoDay(b.t), value: b.cum })));
+    maLine.applyOptions({ color: css("--ma") });
+    cumLine.applyOptions({ color: css("--cum") });
+  }
+
+  function visibleDays() {
+    if (target) return target;
+    const r = chart.timeScale().getVisibleLogicalRange();
+    if (!r || !bars.length) return [0, n - 1];
+    // bar i spans logical [i - 0.5, i + 0.5]; a small tolerance absorbs rounding
+    const i0 = clamp(Math.ceil(r.from - 0.05), 0, bars.length - 1);
+    const i1 = clamp(Math.floor(r.to + 0.05), i0, bars.length - 1);
+    return [bars[i0].first, bars[i1].last];
+  }
+
+  function showDays(d0, d1) {
+    d0 = clamp(Math.round(d0), 0, n - 1); d1 = clamp(Math.round(d1), d0, n - 1);
+    let i0 = bars.findIndex((b) => b.last >= d0);
+    let i1 = bars.length - 1;
+    while (i1 > 0 && bars[i1].first > d1) i1--;
+    if (i0 < 0) i0 = 0;
+    programmaticUntil = performance.now() + 250;
+    chart.timeScale().setVisibleLogicalRange({ from: i0 - 0.5, to: Math.max(i1, i0) + 0.5 });
+  }
+
+  // ------------------------------------------------------------------ ranges & years
+  function rangeDays(key) {
+    const end = n - 1, today = new Date(startMs + end * DAY);
+    const back = (months) => dayIndex(Date.UTC(today.getUTCFullYear(), today.getUTCMonth() - months, today.getUTCDate() + 1));
+    switch (key) {
+      case "1m": return [back(1), end];
+      case "3m": return [back(3), end];
+      case "6m": return [back(6), end];
+      case "ytd": return [dayIndex(Date.UTC(today.getUTCFullYear(), 0, 1)), end];
+      case "1y": return [back(12), end];
+      default: return [0, end];
+    }
+  }
+
+  function goTo(key) {
+    let d0, d1;
+    if (/^\d{4}$/.test(key)) {
+      d0 = dayIndex(Date.UTC(+key, 0, 1)); d1 = dayIndex(Date.UTC(+key, 11, 31));
+      history.replaceState(null, "", "#" + key);
+    } else {
+      [d0, d1] = rangeDays(key);
+      history.replaceState(null, "", location.pathname + location.search);
+    }
+    d0 = clamp(d0, 0, n - 1); d1 = clamp(d1, d0, n - 1);
+    // Presets choose the finest bar size that still fits, unless you picked a coarser one.
+    const room = (chart.timeScale().width() || 800) / 2.5, span = d1 - d0 + 1;
+    const fit = span <= room ? "day" : span / 7 <= room ? "week" : "month";
+    const iv = ORDER[Math.max(ORDER.indexOf(userInterval), ORDER.indexOf(fit))];
+    if (iv !== interval) { programmaticUntil = performance.now() + 250; rebuild(iv); }
+    showDays(d0, d1);
+    setActive(key);
+    target = [d0, d1];
+    scheduleUpdate();
+  }
+
+  function setActive(key) {
+    activeKey = key;
+    if (!key) target = null;
+    document.querySelectorAll("[data-range], [data-year]").forEach((b) => {
+      b.setAttribute("aria-pressed", String((b.dataset.range || b.dataset.year) === key));
+    });
+  }
+
+  function rebuild(iv) {
+    interval = iv;
+    document.querySelectorAll("[data-interval]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.interval === iv)));
+    bars = buildBars(iv);
+    paint();
+  }
+
+  function setInterval_(iv) {
+    const keep = activeKey, keepTarget = target;
+    const [d0, d1] = bars.length ? visibleDays() : rangeDays("1y");
+    programmaticUntil = performance.now() + 250;
+    userInterval = iv;
+    rebuild(iv);
+    showDays(d0, d1);
+    if (keep) { setActive(keep); target = keepTarget; }
+    showLegend(null);
+    scheduleUpdate();
+  }
+
+  // ------------------------------------------------------------------ stats, legend
+  let pending = false;
+  function scheduleUpdate() {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => { pending = false; updateStats(); drawNav(); showLegend(null); });
+  }
+
+  function spanText(days) {
+    if (days <= 45) return `${days} days`;
+    if (days < 730) return `${Math.round(days / 30.44)} months`;
+    return `${(days / 365.25).toFixed(1).replace(/\.0$/, "")} years`;
+  }
+
+  function updateStats() {
+    const [d0, d1] = visibleDays();
+    const days = d1 - d0 + 1, total = sum(d0, d1);
+    let best = 0, bestAt = d0;
+    for (let i = d0; i <= d1; i++) if (counts[i] > best) { best = counts[i]; bestAt = i; }
+
+    $("#s-total").textContent = fmt(total);
+    $("#s-avg").textContent = (total / days).toFixed(1);
+    $("#s-best").textContent = fmt(best);
+    $("#s-best-when").textContent = best ? `best day, ${dayText(startMs + bestAt * DAY)}` : "best day";
+
+    const change = $("#s-change"), when = $("#s-change-when");
+    const p0 = d0 - days, prev = p0 >= 0 ? sum(p0, d0 - 1) : null;
+    if (prev) {
+      const pct = (total - prev) / prev * 100;
+      change.textContent = `${pct >= 0 ? "▲" : "▼"} ${Math.abs(pct).toFixed(0)}%`;
+      change.className = pct >= 0 ? "up" : "down";
+      when.textContent = `against the ${spanText(days)} before`;
+    } else {
+      change.textContent = "n/a";
+      change.className = "";
+      when.textContent = "no earlier period to compare with";
+    }
+    $("#range-label").textContent = `${dayText(startMs + d0 * DAY)} to ${dayText(startMs + d1 * DAY)}`;
+  }
+
+  function showLegend(i) {
+    if (i == null) { const d1 = visibleDays()[1]; i = bars.findIndex((b) => b.last >= d1); }
+    const b = bars[clamp(i, 0, bars.length - 1)]; if (!b) return;
+    const cumOn = $("#t-cum").getAttribute("aria-pressed") === "true";
+    $("#legend").style.left = (cumOn ? chart.priceScale("left").width() + 10 : 14) + "px";
+    const rows = [`<div class="when">${barLabel(b)}${b.partial && interval !== "day" ? ", so far" : ""}</div>`,
+                  `<div><i style="background:${css("--bar")}"></i>${fmt(b.v)} commits</div>`];
+    if ($("#t-ma").getAttribute("aria-pressed") === "true")
+      rows.push(`<div><i style="background:${css("--ma")}"></i>${MA[interval][1]} ${b.ma.toFixed(1)}</div>`);
+    if (cumOn)
+      rows.push(`<div><i style="background:${css("--cum")}"></i>${fmt(b.cum)} in total since ${new Date(startMs).getUTCFullYear()}</div>`);
+    $("#legend").innerHTML = rows.join("");
+  }
+
+  // ------------------------------------------------------------------ navigator
+  const nav = $("#nav");
+  let navWeekly = [];
+  const NAV_H = 64;
+
+  function navGeometry() {
+    const w = nav.clientWidth || 1;
+    return { w, x: (day) => (day / Math.max(n - 1, 1)) * w, day: (x) => (x / w) * (n - 1) };
+  }
+
+  function drawNav() {
+    if (!n) return;
+    const g = navGeometry();
+    nav.setAttribute("viewBox", `0 0 ${g.w} ${NAV_H}`);
+    const max = Math.max(...navWeekly.map((p) => p.v), 1);
+    let path = `M0 ${NAV_H}`;
+    navWeekly.forEach((p) => { path += ` L${g.x(p.d).toFixed(1)} ${(NAV_H - 6 - (p.v / max) * (NAV_H - 14)).toFixed(1)}`; });
+    path += ` L${g.w} ${NAV_H} Z`;
+
+    const [d0, d1] = visibleDays();
+    const x0 = g.x(d0), x1 = Math.max(g.x(d1), x0 + 4);
+    const years = [];
+    for (let y = new Date(startMs).getUTCFullYear() + 1; y <= new Date(startMs + (n - 1) * DAY).getUTCFullYear(); y++) {
+      const x = g.x(dayIndex(Date.UTC(y, 0, 1)));
+      years.push(`<line x1="${x}" x2="${x}" y1="0" y2="${NAV_H}" stroke="${css("--border")}"/>` +
+                 `<text x="${x + 4}" y="12" font-size="10" fill="${css("--muted")}">${y}</text>`);
+    }
+    nav.innerHTML =
+      `<rect width="${g.w}" height="${NAV_H}" fill="${css("--panel")}"/>` + years.join("") +
+      `<path d="${path}" fill="${css("--bar")}" fill-opacity=".35" stroke="${css("--bar")}" stroke-width="1"/>` +
+      `<rect x="0" width="${x0}" height="${NAV_H}" fill="${css("--shade")}"/>` +
+      `<rect x="${x1}" width="${Math.max(g.w - x1, 0)}" height="${NAV_H}" fill="${css("--shade")}"/>` +
+      `<rect class="win" x="${x0}" width="${x1 - x0}" height="${NAV_H}" fill="${css("--window")}" stroke="${css("--bar")}"/>` +
+      `<rect class="handle" x="${x0 - 4}" y="${NAV_H / 2 - 12}" width="8" height="24" rx="3" fill="${css("--bg")}" stroke="${css("--bar")}"/>` +
+      `<rect class="handle" x="${x1 - 4}" y="${NAV_H / 2 - 12}" width="8" height="24" rx="3" fill="${css("--bg")}" stroke="${css("--bar")}"/>`;
+  }
+
+  let drag = null;
+  nav.addEventListener("pointerdown", (e) => {
+    const g = navGeometry(), x = e.offsetX;
+    let [d0, d1] = visibleDays();
+    const x0 = g.x(d0), x1 = g.x(d1);
+    let mode = Math.abs(x - x0) < 8 ? "left" : Math.abs(x - x1) < 8 ? "right" : x > x0 && x < x1 ? "move" : "jump";
+    if (mode === "jump") {
+      const span = d1 - d0, c = g.day(x);
+      d0 = clamp(c - span / 2, 0, n - 1 - span); d1 = d0 + span;
+      showDays(d0, d1); mode = "move";
+    }
+    setActive(null);
+    drag = { mode, x, d0, d1, g };
+    nav.classList.add("dragging");
+    nav.setPointerCapture(e.pointerId);
+  });
+  nav.addEventListener("pointermove", (e) => {
+    if (!drag) return;
+    const dd = drag.g.day(e.offsetX) - drag.g.day(drag.x);
+    let { d0, d1 } = drag;
+    const minSpan = 6;
+    if (drag.mode === "move") { const span = d1 - d0; d0 = clamp(d0 + dd, 0, n - 1 - span); d1 = d0 + span; }
+    if (drag.mode === "left") d0 = clamp(d0 + dd, 0, d1 - minSpan);
+    if (drag.mode === "right") d1 = clamp(d1 + dd, d0 + minSpan, n - 1);
+    showDays(d0, d1);
+    programmaticUntil = 0;
+  });
+  const endDrag = () => { drag = null; nav.classList.remove("dragging"); };
+  nav.addEventListener("pointerup", endDrag);
+  nav.addEventListener("pointercancel", endDrag);
+  new ResizeObserver(() => drawNav()).observe(nav);
+
+  // ------------------------------------------------------------------ keyboard
+  document.addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey || !chart) return;
+    const ts = chart.timeScale(), r = ts.getVisibleLogicalRange();
+    if (!r) return;
+    const w = r.to - r.from;
+    let from = r.from, to = r.to;
+    switch (e.key) {
+      case "ArrowLeft": from -= w * 0.15; to -= w * 0.15; break;
+      case "ArrowRight": from += w * 0.15; to += w * 0.15; break;
+      case "+": case "=": if (w > 4) { from += w * 0.15; to -= w * 0.15; } break;
+      case "-": case "_": from -= w * 0.2; to += w * 0.2; break;
+      case "0": goTo("all"); e.preventDefault(); return;
+      default: return;
+    }
+    e.preventDefault();
+    setActive(null);
+    ts.setVisibleLogicalRange({ from, to });
+  });
+
+  // ------------------------------------------------------------------ theme
+  function applyTheme() {
+    if (!chart) return;
+    chart.applyOptions(chartTheme());
+    paint(); drawNav(); showLegend(null);
+  }
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
+
+  // ------------------------------------------------------------------ start
+  async function start() {
+    let data;
+    try {
+      if (!window.LightweightCharts) throw new Error("The charting library didn't load. Check your connection and refresh.");
+      data = await loadData();
+    } catch (err) {
+      $("#message").textContent = err.message;
+      $("#who").textContent = "Couldn't load the data";
+      return;
+    }
+    counts = data.counts; n = counts.length; login = data.login; startMs = toMs(data.start);
+    prefix = new Float64Array(n + 1);
+    for (let i = 0; i < n; i++) prefix[i + 1] = prefix[i] + counts[i];
+    for (let i = 0; i < n; i += 7) navWeekly.push({ d: i + 3, v: sum(i, Math.min(i + 6, n - 1)) });
+
+    document.title = `Commit history of ${login}`;
+    const since = new Date(startMs);
+    $("#who").innerHTML = `<a href="https://github.com/${encodeURIComponent(login)}">@${login}</a> on GitHub, since ${MONTHS[since.getUTCMonth()]} ${since.getUTCFullYear()}`;
+    $("#updated").textContent = `Updated ${dayText(toMs(data.generated.slice(0, 10)))}`;
+
+    const yearsEl = $("#years");
+    for (let y = since.getUTCFullYear(); y <= new Date(startMs + (n - 1) * DAY).getUTCFullYear(); y++) {
+      const b = document.createElement("button");
+      b.dataset.year = y; b.textContent = y; b.setAttribute("aria-pressed", "false");
+      yearsEl.appendChild(b);
+    }
+    yearsEl.addEventListener("click", (e) => { const y = e.target.closest("[data-year]"); if (y) goTo(y.dataset.year); });
+    $("#ranges").addEventListener("click", (e) => { const r = e.target.closest("[data-range]"); if (r) goTo(r.dataset.range); });
+    $("#intervals").addEventListener("click", (e) => { const b = e.target.closest("[data-interval]"); if (b) setInterval_(b.dataset.interval); });
+    for (const [id, series, extra] of [["#t-ma", () => maLine, null], ["#t-cum", () => cumLine, "left"]]) {
+      $(id).addEventListener("click", (e) => {
+        const on = e.currentTarget.getAttribute("aria-pressed") !== "true";
+        e.currentTarget.setAttribute("aria-pressed", String(on));
+        series().applyOptions({ visible: on });
+        if (extra) chart.applyOptions({ leftPriceScale: { visible: on } });
+        requestAnimationFrame(() => showLegend(null));
+      });
+    }
+
+    createChart();
+    setInterval_("day");
+    const hash = location.hash.slice(1);
+    goTo(/^\d{4}$/.test(hash) && document.querySelector(`[data-year="${hash}"]`) ? hash : "1y");
+    addEventListener("hashchange", () => {
+      const h = location.hash.slice(1);
+      if (document.querySelector(`[data-year="${h}"]`)) goTo(h);
+    });
+    $("#message").hidden = true;
+  }
+  start();
+})();
+</script>
+</body>
+</html>
