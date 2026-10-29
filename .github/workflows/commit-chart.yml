@@ -1,0 +1,33 @@
+name: Commit chart
+
+on:
+  schedule:
+    - cron: "17 6 * * *"   # daily, 06:17 UTC
+  workflow_dispatch:        # run it by hand from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Render SVGs
+        env:
+          # A personal token lets private-repo commits count; GITHUB_TOKEN only sees public ones.
+          GH_TOKEN: ${{ secrets.COMMIT_CHART_TOKEN || secrets.GITHUB_TOKEN }}
+        run: python scripts/commit_chart.py --user "${{ github.repository_owner }}" --years 5 --out-dir assets
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add assets/commit-chart-*.svg
+          git diff --cached --quiet || git commit -m "Refresh commit chart"
+          git push
