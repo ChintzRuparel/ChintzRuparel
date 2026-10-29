@@ -91,6 +91,13 @@ def gql(query: str, variables: dict, token: str) -> dict:
     return payload["data"]
 
 
+def commits(window: dict) -> int:
+    # Private-repo work the token can't see comes back as restrictedContributionsCount
+    # rather than as commits. Adding it in makes the chart match your profile graph
+    # (with a full-access token it is 0 and private commits land in the first field).
+    return window["totalCommitContributions"] + window["restrictedContributionsCount"]
+
+
 def fetch_data(login: str, token: str, n_years: int, now: dt.datetime) -> ChartData:
     user = gql("query($login: String!) { user(login: $login) { login createdAt } }",
                {"login": login}, token)["user"]
@@ -109,16 +116,15 @@ def fetch_data(login: str, token: str, n_years: int, now: dt.datetime) -> ChartD
             if start > now:
                 continue
             fields.append(f'q{q}: contributionsCollection(from: "{iso(start)}", to: "{iso(min(end, now))}") '
-                          "{ totalCommitContributions }")
+                          "{ totalCommitContributions restrictedContributionsCount }")
         if year == now.year - 1:
             fields.append(f'ytd: contributionsCollection(from: "{iso(dt.datetime(year, 1, 1, tzinfo=UTC))}", '
-                          f'to: "{iso(one_year_before(now))}") {{ totalCommitContributions }}')
+                          f'to: "{iso(one_year_before(now))}") {{ totalCommitContributions restrictedContributionsCount }}')
         query = "query($login: String!) { user(login: $login) { " + " ".join(fields) + " } }"
         res = gql(query, {"login": login}, token)["user"]
-        counts[year] = [res[f"q{q}"]["totalCommitContributions"] if f"q{q}" in res else None
-                        for q in range(1, 5)]
+        counts[year] = [commits(res[f"q{q}"]) if f"q{q}" in res else None for q in range(1, 5)]
         if "ytd" in res:
-            ytd_prev = res["ytd"]["totalCommitContributions"]
+            ytd_prev = commits(res["ytd"])
 
     return ChartData(user["login"], years, counts, (now.year, (now.month - 1) // 3 + 1), ytd_prev, now)
 
