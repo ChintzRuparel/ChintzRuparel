@@ -2,8 +2,8 @@ name: Commit chart
 
 on:
   schedule:
-    - cron: "17 6 * * *"   # daily, 06:17 UTC
-  workflow_dispatch:        # run it by hand from the Actions tab
+    - cron: "17 6 * * *"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -24,7 +24,6 @@ jobs:
 
       - name: Render SVGs
         env:
-          # A personal token lets private-repo commits count; GITHUB_TOKEN only sees public ones.
           GH_TOKEN: ${{ secrets.COMMIT_CHART_TOKEN || secrets.GITHUB_TOKEN }}
         run: python scripts/commit_chart.py --user "${{ github.repository_owner }}" --years 5 --out-dir assets
 
@@ -35,6 +34,5 @@ jobs:
           git add assets/commit-chart-*.svg
           git diff --cached --quiet && exit 0
           git commit -m "Refresh commit chart"
-          # main may have moved on since checkout (e.g. a re-run of an older run)
           git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"
           git push origin HEAD:"${GITHUB_REF_NAME}"
